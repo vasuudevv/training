@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask To Do</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="">
+</head>
+<body class="m-0">
+<div class="container p-5">
+   <h1 class="text-center pt-4 pb-4">To Do App</h1>
+   <div class="container mt-4">
+      
+        <form action="/add" method="POST">
+            <div class="container">
+                <label for="Title" class="fs-5 p-2">To Do Title</label><br>
+                <input type="text" name="title" class="form-control shadow" placeholder="Enter To do task..." aria-label="Enter To do task..." aria-describedby="button-addon2">
+                <br>
+                <button type="submit" class="btn btn-primary pl-3" id="button-addon2" style="border-radius: 5px;">  Add  </button>
+            </div>
+        </form>
+   
+        <!-- <form action="/search" method="POST">
+            <div class="container">
+                <label for="Title" class="fs-5 p-2">Search a Task</label><br>
+                <input type="text" name="search" class="form-inline form-control shadow" placeholder="Search a To do task...">
+                <br>
+                <button type="submit" class="btn btn-primary pl-3" style="border-radius: 5px;">Search</button>
+            </div>
+        </form> -->
+       
+    </div>
+    
+  
+
+   <hr>
+
+   {% for todo in todo_list %}
+   <div class="container p-3 m-3 shadow p-3 mb-5 bg-body rounded text-white border border-1">
+        <p class="fw-bold fst-italic p-2 fs-5">{{ todo.id}} | {{todo.title}} </p>
+
+        {% if todo.complete == False %}
+            <span class="bg-light text-dark p-2" style="border-radius: 5px;">Not Completed</span>
+        {% else %}
+            <span class="text-white p-2" style="background-color: rgb(58, 211, 58); border-radius:5px;">Completed</span>
+        {% endif %}
+
+        <a href="/update/{{ todo.id}}" class="btn btn-primary mb-1">Update</a>
+        <a href="/delete/{{ todo.id}}" class="btn btn-danger mb-1">Delete</a>
+    </div>
+
+   {% endfor %}
+</div>
+</body>
+</html>
